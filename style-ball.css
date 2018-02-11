@@ -1,0 +1,109 @@
+            body{
+                    background: linear-gradient(to right, #00b09b, #96c93d);
+                }
+            .container {
+                margin-top: 60px;
+            }
+            .pokeball {
+                box-sizing: border-box;
+
+                /*native css*/
+
+                --pokeball-size: 350px;
+                --pokeball-inner-size: 140px;
+                --pokeball-border-size: 20px;
+
+                --before-diameter: var(--pokeball-inner-size);
+                --after-diameter: calc(var(--before-diameter) - (var(--pokeball-border-size)*3));
+
+                border: var(--pokeball-border-size) solid #262122;
+                width: var(--pokeball-size);
+                height: var(--pokeball-size);
+                border-radius: 100%;
+                margin: 0 auto;
+                position: relative;
+
+                background: linear-gradient(
+                    150deg,
+                    #BA0C2F 0%,
+                    #BA0C2F 44%,
+                    #262122 44%,
+                    #262122 56%,
+                    #fff 56%,
+                    #fff 100%
+
+                )
+            }
+            .pokeball:before,
+            .pokeball:after {
+                content: " ";
+                border-radius: 100%;
+                display: block;
+                position: absolute;
+            }
+
+            .pokeball:before {
+                background: #262122;
+                width: var(--before-diameter);
+                height: var(--before-diameter);
+                /*left: 50%;
+                top: 50%;*/
+                left: calc(50% - var(--before-diameter) /2);
+                top: calc(50% - var(--before-diameter) /2);
+            }
+
+            .pokeball:after {
+                width: var(--after-diameter);
+                height: var(--after-diameter);
+                top: calc(50% - ((var(--after-diameter) /2) + var(--pokeball-border-size)));
+                left: calc(50% - ((var(--after-diameter) /2) + var(--pokeball-border-size)));
+                background-color: #fff;
+
+                border: double var(--pokeball-border-size) #262122;/*multiple borders -- here double*/
+            }
+            /*animation-code*/
+            .pokeball-animated {
+                animation-duration: 5s;
+                animation-fill-mode: both;/*animation will take place in both for and back direction*/
+                animation-iteration-count: infinite;
+                animation-name: shake; 
+            }
+
+            @keyframes shake{
+                from {
+                    transform: none;
+                }
+
+                20% {
+                    transform: translate3d(-150%,0,0) rotate3d(0,0,1,-100deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+
+                40% {
+                    transform: translate3d(150%,0,0) rotate3d(0,0,1,50deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+
+                50% {
+                    transform: translate3d(-100%,0,0) rotate3d(0,0,1,-100deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+
+                60% {
+                    transform: translate3d(100%,0,0) rotate3d(0,0,1,50deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+                70% {
+                    transform: translate3d(-50%,0,0) rotate3d(0,0,1,-100deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+
+                80% {
+                    transform: translate3d(50%,0,0) rotate3d(0,0,1,500deg);
+                    /*-webkit-filter: blur(2px);*/
+                }
+
+                to {
+                    transform: none;
+                }
+            }
